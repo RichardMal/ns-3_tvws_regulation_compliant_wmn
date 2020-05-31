@@ -1,0 +1,11 @@
+--- wscript	2016-10-03 20:57:08.176248189 -0700
++++ wscript	2016-10-03 19:49:01.486388853 -0700
+@@ -14,7 +14,7 @@
+ # after = TaskGen.after
+ 
+ # https://github.com/gjcarneiro/pybindgen
+-REQUIRED_PYBINDGEN_VERSION = '0.17.0.post49+ng0e4e3bc'
++REQUIRED_PYBINDGEN_VERSION = '0.17.0.post57+nga6376f2'
+ REQUIRED_PYGCCXML_VERSION = (0, 9, 5)
+ 
+ RUN_ME=-3

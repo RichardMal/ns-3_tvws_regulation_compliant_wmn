@@ -1,0 +1,219 @@
+/* -*- Mode:C++; c-file-style:"gnu"; indent-tabs-mode:nil; -*- */
+/*
+ * Copyright (c) 2008,2009 IITP RAS
+ *
+ * This program is free software; you can redistribute it and/or modify
+ * it under the terms of the GNU General Public License version 2 as
+ * published by the Free Software Foundation;
+ *
+ * This program is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ * GNU General Public License for more details.
+ *
+ * You should have received a copy of the GNU General Public License
+ * along with this program; if not, write to the Free Software
+ * Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
+ *
+ * Authors: Kirill Andreev <andreev@iitp.ru>
+ */
+#include "ns3/dot11s-installer.h"
+#include "ns3/peer-management-protocol.h"
+#include "ns3/hwmp-protocol.h"
+#include "ns3/wifi-net-device.h"
+#include "ns3/mesh-wifi-interface-mac.h"
+
+namespace ns3 {
+using namespace dot11s;
+NS_OBJECT_ENSURE_REGISTERED (Dot11sStack);
+  
+TypeId
+Dot11sStack::GetTypeId ()
+{
+  static TypeId tid = TypeId ("ns3::Dot11sStack")
+    .SetParent<MeshStack> ()
+    .SetGroupName ("Mesh")
+    .AddConstructor<Dot11sStack> ()
+    .AddAttribute ("Root", 
+                   "The MAC address of root mesh point.",
+                   Mac48AddressValue (Mac48Address ("ff:ff:ff:ff:ff:ff")),
+                   MakeMac48AddressAccessor (&Dot11sStack::m_root),
+                   MakeMac48AddressChecker ());
+  return tid;
+}
+Dot11sStack::Dot11sStack () :
+  m_root (Mac48Address ("ff:ff:ff:ff:ff:ff"))
+ /*
+  m_root2 (Mac48Address ("00:00:00:00:00:03")),
+  m_root3 (Mac48Address ("00:00:00:00:00:04"))
+  */
+{
+}
+Dot11sStack::~Dot11sStack ()
+{
+}
+void
+Dot11sStack::DoDispose ()
+{
+}
+bool
+Dot11sStack::InstallStack (Ptr<MeshPointDevice> mp)
+{
+  //Install Peer management protocol:
+  Ptr<PeerManagementProtocol> pmp = CreateObject<PeerManagementProtocol> ();
+  pmp->SetMeshId ("mesh");
+  bool install_ok = pmp->Install (mp);
+  if (!install_ok)
+    {
+      return false;
+    }
+  //Install HWMP:
+  Ptr<HwmpProtocol> hwmp = CreateObject<HwmpProtocol> ();
+  install_ok = hwmp->Install (mp);
+  if (!install_ok)
+    {
+      return false;
+    }
+  if (mp->GetAddress () == m_root)
+    {
+      hwmp->SetRoot ();
+    }
+
+  /*
+   * Richard: start my addition, an effort to add multiple mesh roots
+   */
+  /*
+  if (mp->GetAddress () == m_root2)
+     {
+       hwmp->SetRoot ();
+     }
+
+  if (mp->GetAddress () == m_root3)
+     {
+       hwmp->SetRoot ();
+     }
+
+
+  */
+  /* Richard: 30 April 2019 (final stretch)
+   * Attempting to make every node a root mesh point
+   */
+
+  if (mp->GetAddress () != Mac48Address ("00:00:00:00:00:00") )
+      {
+        hwmp->SetRoot ();
+      }
+
+  /*
+   * Richard: specify nodes to set as mesh root points
+   * commented out when doing convergence analysis and also when working on dynamic metric selection stuff
+   */
+/*
+  if (
+		  //mp->GetAddress () == Mac48Address ("00:00:00:00:00:01")|| //first node, interfa
+		  mp->GetAddress () == Mac48Address ("00:00:00:00:00:02")|| //when using two interfaces this address is for the second interface  of the first node
+		  mp->GetAddress () == Mac48Address ("00:00:00:00:00:03")||
+		  mp->GetAddress () == Mac48Address ("00:00:00:00:00:04")||
+
+		  mp->GetAddress () == Mac48Address ("00:00:00:00:00:05")||
+	      mp->GetAddress () == Mac48Address ("00:00:00:00:00:06")||
+
+	      mp->GetAddress () == Mac48Address ("00:00:00:00:00:07")||
+	      mp->GetAddress () == Mac48Address ("00:00:00:00:00:08")||
+
+	      mp->GetAddress () == Mac48Address ("00:00:00:00:00:09")||
+	      mp->GetAddress () == Mac48Address ("00:00:00:00:00:0a")||
+
+	      mp->GetAddress () == Mac48Address ("00:00:00:00:00:0b")||
+	      mp->GetAddress () == Mac48Address ("00:00:00:00:00:0c")||
+
+	      mp->GetAddress () == Mac48Address ("00:00:00:00:00:0d")||
+	      mp->GetAddress () == Mac48Address ("00:00:00:00:00:0e")||
+
+	      mp->GetAddress () == Mac48Address ("00:00:00:00:00:0f")|| //node 7 first interface
+	      mp->GetAddress () == Mac48Address ("00:00:00:00:00:10")|| //node 7 second interface
+
+	      mp->GetAddress () == Mac48Address ("00:00:00:00:00:11")||
+	      mp->GetAddress () == Mac48Address ("00:00:00:00:00:12")||
+
+	      mp->GetAddress () == Mac48Address ("00:00:00:00:00:13")||
+	      mp->GetAddress () == Mac48Address ("00:00:00:00:00:14")||
+
+	      mp->GetAddress () == Mac48Address ("00:00:00:00:00:15")||
+	      mp->GetAddress () == Mac48Address ("00:00:00:00:00:16")||
+
+	      mp->GetAddress () == Mac48Address ("00:00:00:00:00:20")||
+	      mp->GetAddress () == Mac48Address ("00:00:00:00:00:21")||
+	      mp->GetAddress () == Mac48Address ("00:00:00:00:00:24")||
+	      mp->GetAddress () == Mac48Address ("00:00:00:00:00:25")||
+	      mp->GetAddress () == Mac48Address ("00:00:00:00:00:26")||
+	      mp->GetAddress () == Mac48Address ("00:00:00:00:00:27")||
+	      mp->GetAddress () == Mac48Address ("00:00:00:00:00:28")||
+
+	      mp->GetAddress () == Mac48Address ("00:00:00:00:00:22")||
+	      mp->GetAddress () == Mac48Address ("00:00:00:00:00:23")||
+	      mp->GetAddress () == Mac48Address ("00:00:00:00:00:29")||
+	      mp->GetAddress () == Mac48Address ("00:00:00:00:00:30")
+
+
+
+
+	  )
+      {
+        hwmp->SetRoot ();
+      }
+*/
+  /*
+   * Richard: end my addition
+   */
+  //Install interaction between HWMP and Peer management protocol:
+  //PeekPointer()'s to avoid circular Ptr references
+  pmp->SetPeerLinkStatusCallback (MakeCallback (&HwmpProtocol::PeerLinkStatus, PeekPointer (hwmp)));
+  hwmp->SetNeighboursCallback (MakeCallback (&PeerManagementProtocol::GetPeers, PeekPointer (pmp)));
+  return true;
+}
+void
+Dot11sStack::Report (const Ptr<MeshPointDevice> mp, std::ostream& os)
+{
+  mp->Report (os);
+
+  std::vector<Ptr<NetDevice> > ifaces = mp->GetInterfaces ();
+  for (std::vector<Ptr<NetDevice> >::const_iterator i = ifaces.begin (); i != ifaces.end (); ++i)
+    {
+      Ptr<WifiNetDevice> device = (*i)->GetObject<WifiNetDevice> ();
+      NS_ASSERT (device != 0);
+      Ptr<MeshWifiInterfaceMac> mac = device->GetMac ()->GetObject<MeshWifiInterfaceMac> ();
+      NS_ASSERT (mac != 0);
+      mac->Report (os);
+    }
+  Ptr<HwmpProtocol> hwmp = mp->GetObject<HwmpProtocol> ();
+  NS_ASSERT (hwmp != 0);
+  hwmp->Report (os);
+
+  Ptr<PeerManagementProtocol> pmp = mp->GetObject<PeerManagementProtocol> ();
+  NS_ASSERT (pmp != 0);
+  pmp->Report (os);
+}
+void
+Dot11sStack::ResetStats (const Ptr<MeshPointDevice> mp)
+{
+  mp->ResetStats ();
+
+  std::vector<Ptr<NetDevice> > ifaces = mp->GetInterfaces ();
+  for (std::vector<Ptr<NetDevice> >::const_iterator i = ifaces.begin (); i != ifaces.end (); ++i)
+    {
+      Ptr<WifiNetDevice> device = (*i)->GetObject<WifiNetDevice> ();
+      NS_ASSERT (device != 0);
+      Ptr<MeshWifiInterfaceMac> mac = device->GetMac ()->GetObject<MeshWifiInterfaceMac> ();
+      NS_ASSERT (mac != 0);
+      mac->ResetStats ();
+    }
+  Ptr<HwmpProtocol> hwmp = mp->GetObject<HwmpProtocol> ();
+  NS_ASSERT (hwmp != 0);
+  hwmp->ResetStats ();
+
+  Ptr<PeerManagementProtocol> pmp = mp->GetObject<PeerManagementProtocol> ();
+  NS_ASSERT (pmp != 0);
+  pmp->ResetStats ();
+}
+} // namespace ns3

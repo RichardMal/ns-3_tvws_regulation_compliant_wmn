@@ -1,0 +1,2 @@
+in m_mesh, m_hwmp use airtime metric. Howver, the version of Airtime being used has been modified to include other metrics that are dynamically selected at runtime, or at least that is the intention:)
+Richard, 27 January 2018

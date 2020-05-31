@@ -1,0 +1,4 @@
+6 May 2019.
+The individual_node folder contains allowable channel list for each node. In essence this is the node's local spectrum information.
+
+When node i receives a beacon from node i-1, after querying the glsd, node i constructs a list of common channels. The common folder contains the intersection set or the common channels list constructed by each node.

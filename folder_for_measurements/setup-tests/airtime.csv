@@ -1,0 +1,3 @@
+FlowID,TX bitrate (kbit/s),RX bitrate (kbit/s),meanDelay [s],PacketLoss (%),Throughput (kbps),Mean jitter (s),Protocol
+1,84162.52485891325,1785.8145035889097,0.946030687854083,0.0,1352.0400656741967,0.11375067197989276,UDP
+2,1785.8145035889097,0,0,0,0,0,UDP

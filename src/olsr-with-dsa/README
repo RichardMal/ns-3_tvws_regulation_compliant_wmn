@@ -1,0 +1,8 @@
+Richard 
+
+olsr-with-dsa is based on the original olsr that ships with NS3.
+
+For simplicity, before making any changes, I maintain the original module and then to create my modified version I simply rename every file in olsr by inserting "with-dsa" after"olsr" in the file name.
+
+I have not touched test, examples folder, these were create by the ./create-module-script
+ 

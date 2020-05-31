@@ -1,0 +1,18 @@
+
+1) Area: beacons and piggy backing on beacons
+   search term: beacon interval adhoc wifi.
+   link: https://groups.google.com/forum/#!searchin/ns-3-users/$20BEACON$20INTERVAL$20adhoc$20wifi%7Csort:relevance
+
+2) ~wifi/examples/wifi-phy-configuration.cc has "ActiveProbing" that can be fale/true for wifi station; and "BeaconGeneration" that can be true/false for the AP.
+    If only I could find the equivalent setting in mesh and also on a per-node basis.
+
+3) Area: spectrum-wifi-phy; this may be useful in attempting to simulation tvws kind of operating spectrum.
+  link: https://groups.google.com/forum/#!searchin/ns-3-users/setMacType%7Csort:date/ns-3-users/Hlz7d910qxc/I9d69u3wBgAJ
+
+4) Area: accesing node's mac object
+   link: https://groups.google.com/forum/#!msg/ns-3-users/idtjCwij-lE/W_iLgwp9AwAJ
+
+5) Area: simpler way to assign values without going through a loop and in a few lines:
+https://groups.google.com/forum/#!searchin/ns-3-users/how$20to$20access$20mac$20$20object%7Csort:relevance/ns-3-users/TZ6ZftgIkvU/ELEw4TTosqYJ
+
+6)

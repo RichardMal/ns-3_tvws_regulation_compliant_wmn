@@ -1,0 +1,7 @@
+metric,meanDelay_in_seconds,PacketLoss_percentage,Throughput_kbps,Mean_jitter_in_seconds,Protocol,simulation_duration (s),Topology,m_step
+hopcount,840.44,0,530.06,0.01,UDP,10,7x7,89
+a_hopcount,1166.48,0,739.51,0.03,UDP,10,7x7,89
+etx,1166.48,0,739.51,0.03,UDP,10,7x7,89
+a_etx,1166.48,0,739.51,0.03,UDP,10,7x7,89
+airtime,1273.42,0,790.66,0.09,UDP,10,7x7,89
+a_airtime,1273.42,0,790.66,0.09,UDP,10,7x7,89

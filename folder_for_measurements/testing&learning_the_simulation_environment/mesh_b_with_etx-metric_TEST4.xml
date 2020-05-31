@@ -1,0 +1,18 @@
+<?xml version="1.0" ?>
+<FlowMonitor>
+  <FlowStats>
+    <Flow flowId="1" timeFirstTxPacket="+0.0ns" timeFirstRxPacket="+2033530957.0ns" timeLastTxPacket="+119900000000.0ns" timeLastRxPacket="+119923696996.0ns" delaySum="+31116930708.0ns" jitterSum="+4978415935.0ns" lastDelay="+23696996.0ns" txBytes="1262400" rxBytes="1212956" txPackets="1200" rxPackets="1153" lostPackets="47" timesForwarded="0">
+    </Flow>
+    <Flow flowId="2" timeFirstTxPacket="+2033530957.0ns" timeFirstRxPacket="+2077727382.0ns" timeLastTxPacket="+119923696996.0ns" timeLastRxPacket="+119943860992.0ns" delaySum="+23458494518.0ns" jitterSum="+1900446399.0ns" lastDelay="+20163996.0ns" txBytes="1212956" rxBytes="1138264" txPackets="1153" rxPackets="1082" lostPackets="69" timesForwarded="0">
+    </Flow>
+    <Flow flowId="3" timeFirstTxPacket="+100822604514.0ns" timeFirstRxPacket="+100838275687.0ns" timeLastTxPacket="+119876039628.0ns" timeLastRxPacket="+119876701294.0ns" delaySum="+240178041.0ns" jitterSum="+437352921.0ns" lastDelay="+661666.0ns" txBytes="3680" rxBytes="2024" txPackets="40" rxPackets="22" lostPackets="8" timesForwarded="0">
+    </Flow>
+  </FlowStats>
+  <Ipv4FlowClassifier>
+    <Flow flowId="2" sourceAddress="10.1.1.1" destinationAddress="10.1.1.49" protocol="17" sourcePort="9" destinationPort="49153" />
+    <Flow flowId="3" sourceAddress="10.1.1.4" destinationAddress="10.1.1.2" protocol="17" sourcePort="49153" destinationPort="9" />
+    <Flow flowId="1" sourceAddress="10.1.1.49" destinationAddress="10.1.1.1" protocol="17" sourcePort="49153" destinationPort="9" />
+  </Ipv4FlowClassifier>
+  <Ipv6FlowClassifier>
+  </Ipv6FlowClassifier>
+</FlowMonitor>

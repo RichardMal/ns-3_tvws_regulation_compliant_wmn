@@ -1,0 +1,73 @@
+<MeshPointDevice time="120" address="00:00:00:00:00:1f">
+<Statistics
+txUnicastData="0"
+txUnicastDataBytes="0"
+txBroadcastData="16"
+txBroadcastDataBytes="448"
+rxUnicastData="0"
+rxUnicastDataBytes="0"
+rxBroadcastData="3"
+rxBroadcastDataBytes="84"
+fwdUnicastData="0"
+fwdUnicastDataBytes="0"
+fwdBroadcastData="3"
+fwdBroadcastDataBytes="84"
+/>
+<Interface BeaconInterval="0.5" Channel="112" Address = "00:00:00:00:00:1f">
+<Statistics rxBeacons="7" txFrames="97" txBytes="3766" rxFrames="5638" rxBytes="231452"/>
+</Interface>
+<Hwmp address="00:00:00:00:00:1f"
+maxQueueSize="255"
+Dot11MeshHWMPmaxPREQretries="3"
+Dot11MeshHWMPnetDiameterTraversalTime="0.1024"
+Dot11MeshHWMPpreqMinInterval="0.1024"
+Dot11MeshHWMPperrMinInterval="0.1024"
+Dot11MeshHWMPactiveRootTimeout="5.12"
+Dot11MeshHWMPactivePathTimeout="5.12"
+Dot11MeshHWMPpathToRootInterval="2.048"
+Dot11MeshHWMPrannInterval="5.12"
+isRoot="1"
+maxTtl="32"
+unicastPerrThreshold="32"
+unicastPreqThreshold="1"
+unicastDataThreshold="1"
+doFlag="0"
+rfFlag="1">
+<Statistics txUnicast="0" txBroadcast="19" txBytes="532" droppedTtl="0" totalQueued="0" totalDropped="0" initiatedPreq="0" initiatedPrep="0" initiatedPerr="0"/>
+<HwmpProtocolMac
+address ="00:00:00:00:00:1f">
+<Statistics txPreq= "60"
+txPrep="0"
+txPerr="0"
+rxPreq="1"
+rxPrep="0"
+rxPerr="0"
+txMgt="60"
+txMgtBytes="2460"
+rxMgt="1"
+rxMgtBytes="41"
+txData="19"
+txDataBytes="684"
+rxData="4"
+rxDataBytes="144"/>
+</HwmpProtocolMac>
+</Hwmp>
+<PeerManagementProtocol>
+<Statistics linksTotal="0" linksOpened="1" linksClosed="1"/>
+<PeerManagementProtocolMac address="00:00:00:00:00:1f">
+<Statistics txOpen="11"
+txConfirm="1"
+txClose="6"
+rxOpen="1"
+rxConfirm="1"
+rxClose="0"
+dropped="0"
+brokenMgt="0"
+txMgt="18"
+txMgtBytes="508"
+rxMgt="2"
+rxMgtBytes="62"
+beaconShift="0"/>
+</PeerManagementProtocolMac>
+</PeerManagementProtocol>
+</MeshPointDevice>

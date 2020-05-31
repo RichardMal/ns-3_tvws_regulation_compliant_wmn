@@ -1,0 +1,11 @@
+CREATED: 2 March 2017
+UPDATED: 6 March 2017
+
+SIMULATION FILE: scratch/ht-wifi-network.cc
+STANDARD: 802.11n
+
+NOTES:
+
+1. The csv files contain throughput measurements or IEEE 802.11n WiFi network for 7 different modulation and coding schemes (MCS) vallues. My intention was to put a spin on it and observe how the performance varies with distance. The distance range covered in the measurement is indicated in the filename e.g. *_1-200.csv is for 1 - 200 meters.
+
+2. The file names end in tcp.csv and udp.csv for tcp and udp traffic respectively
